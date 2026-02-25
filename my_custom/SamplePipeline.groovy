@@ -1,11 +1,18 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'MY_STRING', defaultValue: '', description: 'A string parameter')
+        booleanParam(name: 'MY_BOOL', defaultValue: false, description: 'A boolean parameter')
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 echo 'Checking out source...'
                 echo 'Branch: main'
+                echo "String parameter: ${params.MY_STRING}"
+                echo "Boolean parameter: ${params.MY_BOOL}"
             }
         }
 
