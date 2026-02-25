@@ -18,6 +18,13 @@ pipeline {
             }
         }
 
+        stage('Run Sample Script') {
+            steps {
+                echo 'Running sample script from this branch...'
+                sh 'bash my_custom/sample-script.sh'
+            }
+        }
+
         stage('Build') {
             steps {
                 echo 'Running build...'
