@@ -4,15 +4,17 @@ pipeline {
     parameters {
         string(name: 'MY_STRING', defaultValue: '', description: 'A string parameter')
         booleanParam(name: 'MY_BOOL', defaultValue: false, description: 'A boolean parameter')
+        string(name: 'branch', defaultValue: 'main', description: 'Branch to check out')
     }
 
     stages {
         stage('Checkout') {
             steps {
                 echo 'Checking out source...'
-                echo 'Branch: main'
+                echo "Branch to check out: ${params.branch}"
                 echo "String parameter: ${params.MY_STRING}"
                 echo "Boolean parameter: ${params.MY_BOOL}"
+                checkout scm: [$class: 'GitSCM', branches: [[name: params.branch]], userRemoteConfigs: scm.userRemoteConfigs]
             }
         }
 
